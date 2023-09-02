@@ -1,0 +1,5 @@
+node_modules
+*.sqlite
+startup.sh
+package-lock.json
+.env
