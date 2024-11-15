@@ -1,5 +1,5 @@
 import fs from 'fs';
-import https from 'https';
+import http from 'http';
 
 import { nanoid } from 'nanoid';
 
@@ -11,16 +11,12 @@ const db = new QuickDB();
 import express from 'express';
 const app = express();
 
-const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/jomity.net/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/jomity.net/cert.pem')
-};
 const port = 3030;
 const version = '1.0';
 const appid = process.env.APPID;
 const limit = 1000 * 60 * 60 * 24 * 7; // 1 week
 
-app.get('/', async (req, res) => {
+app.get('/auth', async (req, res) => {
     let query = req.query;
 
     // Request parameters
@@ -141,7 +137,7 @@ app.get('/', async (req, res) => {
     res.json(json);
 });
 
-const server = https.createServer(options, app);
+const server = http.createServer(app);
 
 server.listen(port, () => {
     console.log(`listening on *:${port}`);
