@@ -126,7 +126,7 @@ app.get('/*', async (res, req) => {
         res.writeStatus('500 Internal Server Error');
         res.end(JSON.stringify({ ResultCode: 6, Message: 'Internal server error' }));
     }
-}).listen("0.0.0.0", port, (listenSocket) => {
+}).listen('0.0.0.0', port, (listenSocket) => {
     if (listenSocket) console.log(`Server is running on 0.0.0.0:${port}`);
     else console.error(`Failed to start server on port ${port}`);
 });
