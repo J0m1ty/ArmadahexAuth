@@ -24,11 +24,11 @@
     "author": "Jomity",
     "license": "ISC",
     "dependencies": {
-        "better-sqlite3": "^11.9.1",
+        "better-sqlite3": "^12.1.1",
         "dotenv": "^16.5.0",
         "nanoid": "^5.1.5",
         "quick.db": "^9.1.7",
-        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.51.0"
+        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.52.0"
     },
     "devDependencies": {
         "@types/node": "^22.14.1",
