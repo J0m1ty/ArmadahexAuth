@@ -24,13 +24,16 @@ app.get('/*', async (res, req) => {
     const url = new URL('http://localhost' + req.getUrl() + '?' + req.getQuery());
     const query = Object.fromEntries(url.searchParams) as AuthQuery;
 
+    // check test header (coming from uptime robot)
+    const testHeader = req.getHeader('X-Test-Request');
+
     let result = 0;
     let message = 'Incomplete authentication.';
     let userid: string | null = null;
     let data: AuthResponse['Data'] | undefined;
 
     try {
-        if (query.appid == appid && query.test) {
+        if (testHeader) {
             result = 1;
             message = 'Success.';
         } else if (!query.appid || !query.user || (!query.pass && !query.token) || !query.version) {
