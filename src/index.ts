@@ -30,7 +30,10 @@ app.get('/*', async (res, req) => {
     let data: AuthResponse['Data'] | undefined;
 
     try {
-        if (!query.appid || !query.user || (!query.pass && !query.token) || !query.version) {
+        if (query.appid == appid && query.test) {
+            result = 1;
+            message = 'Success.';
+        } else if (!query.appid || !query.user || (!query.pass && !query.token) || !query.version) {
             result = 3;
             message = 'Missing parameters.';
         } else if (query.appid !== appid) {

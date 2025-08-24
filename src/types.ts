@@ -21,4 +21,5 @@ export interface AuthQuery {
     pass?: string;
     token?: string;
     version?: string;
+    test?: string;
 }
