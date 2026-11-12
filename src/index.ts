@@ -7,8 +7,9 @@ import type { User, AuthResponse, AuthQuery } from './types';
 
 config();
 
-const db = new QuickDB();
-const port = Number(process.env.PORT) ?? 3030;
+// DB_PATH is set by the Docker image (/data/json.sqlite)
+const db = new QuickDB({ filePath: process.env.DB_PATH || 'json.sqlite' });
+const port = Number(process.env.PORT) || 3030;
 const version = '1.0';
 const appid = process.env.APPID;
 const limit = 1000 * 60 * 60 * 24 * 7; // 1 week
@@ -25,7 +26,7 @@ app.get('/*', async (res, req) => {
     const query = Object.fromEntries(url.searchParams) as AuthQuery;
 
     // check test header (coming from uptime robot)
-    const testHeader = req.getHeader('X-Test-Request');
+    const testHeader = req.getHeader('x-test-request'); // uWS only matches lowercase names
 
     let result = 0;
     let message = 'Incomplete authentication.';
