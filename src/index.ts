@@ -24,8 +24,7 @@ app.get('/*', async (res, req) => {
     const url = new URL('http://localhost' + req.getUrl() + '?' + req.getQuery());
     const query = Object.fromEntries(url.searchParams) as AuthQuery;
 
-    // check test header (coming from uptime robot)
-    const testHeader = req.getHeader('X-Test-Request');
+    const testHeader = req.getHeader('X-Test-Request') === 'true';
 
     let result = 0;
     let message = 'Incomplete authentication.';
