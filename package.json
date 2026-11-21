@@ -28,7 +28,7 @@
         "nanoid": "^6.0.2",
         "quick.db": "^9.1.7",
         "tsx": "^4.19.3",
-        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.52.0"
+        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.71.0"
     },
     "devDependencies": {
         "@types/node": "^22.14.1",

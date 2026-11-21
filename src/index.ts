@@ -1,9 +1,12 @@
-import { App } from 'uWebSockets.js';
+import { createRequire } from 'module';
 import { QuickDB } from 'quick.db';
 import { nanoid } from 'nanoid';
 import { config } from 'dotenv';
 import { readFileSync } from 'fs';
 import type { User, AuthResponse, AuthQuery } from './types';
+
+// Load uWS through require: its ESM wrapper (v20.71.0) imports a file that isn't shipped.
+const { App } = createRequire(import.meta.url)('uWebSockets.js') as typeof import('uWebSockets.js');
 
 config();
 
