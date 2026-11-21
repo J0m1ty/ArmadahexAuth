@@ -1,16 +1,14 @@
 # Built by .github/workflows/docker.yml and pushed to ghcr.io/j0m1ty/auth.
-FROM node:24-slim AS build
+FROM node:24-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54 AS build
 # git for the uWebSockets.js GitHub dependency, build tools in case
 # better-sqlite3 has no prebuilt binary for this Node version
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates python3 make g++ \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-COPY package.json ./
-# production dependencies plus tsx, which runs the TypeScript directly
-# (the dev list is dropped in this throwaway copy so tsx lands in dependencies)
-RUN npm pkg delete devDependencies && npm install tsx@^4.19.3
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-FROM node:24-slim
+FROM node:24-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
 ENV NODE_ENV=production DB_PATH=/data/json.sqlite PORT=3030
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
