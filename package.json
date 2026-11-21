@@ -23,7 +23,7 @@
     "author": "Jomity",
     "license": "ISC",
     "dependencies": {
-        "better-sqlite3": "^12.1.1",
+        "better-sqlite3": "^13.2.0",
         "dotenv": "^16.5.0",
         "nanoid": "^5.1.5",
         "quick.db": "^9.1.7",
